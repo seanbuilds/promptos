@@ -1,10 +1,14 @@
 # PromptOS v2.0
 
+**A prompt operating system for LLMs — one stable kernel, unlimited domain modules.**
+
+Inspired by [ai-boost/awesome-prompts](https://github.com/ai-boost/awesome-prompts).
+
 ---
 
 ## What Is This?
 
-The `awesome-prompts` repository has 275 expert system prompts covering everything from SRE to academic peer review to Solidity smart contract engineering. They're great. But they each reinvent the same interaction scaffolding — verbosity control, output formatting, slash commands, continuation handling — from scratch every time.
+The `awesome-prompts` repository has 275 expert system prompts covering everything from SRE to academic peer review to Solidity smart contract engineering. They are great — but each one reinvents the same interaction scaffolding from scratch: verbosity control, output formatting, continuation handling, slash commands.
 
 **PromptOS separates the stable kernel from the domain-specific module.**
 
@@ -12,23 +16,20 @@ The `awesome-prompts` repository has 275 expert system prompts covering everythi
 System Prompt = PROMPTOS_KERNEL_v2.md + modules/{domain}.module.md
 ```
 
-The kernel owns: *how* you respond (laws, verbosity, workflow, self-audit, slash commands).  
+The kernel owns: *how* you respond (laws, verbosity, workflow, self-audit, slash commands).
 The module owns: *what* you know (domain identity, process, tooling, output format).
+
+Every prompt from `ai-boost/awesome-prompts` has been recompiled into this format.
 
 ---
 
-## How It Was Built
+## Core Design Principles
 
-This repo was generated through a **Best-of-N competition**:
-
-1. Cloned `ai-boost/awesome-prompts` (275 prompts)
-2. Spawned 4 parallel agents, each with a different analytical lens:
-   - 🪶 **Radical Minimalism** — smallest possible prompt that shifts model defaults
-   - 🔌 **Modular Composition** — kernel/module plugin architecture
-   - 🧲 **Anti-Drift Engineering** — behavioral consistency across 100+ turns
-   - 🚀 **User Intent First** — silent inference, cold-start, real deployment
-3. Scored all 4 proposals across 6 criteria, synthesized the winner
-4. Compiled all 275 prompts into the new format
+- **Behavioral delta only** — a rule only earns its place if a capable generalist model would get it wrong without being told. Everything else is cut.
+- **Kernel/module separation** — shared runtime logic lives in one file, loaded once. Domain logic lives in swappable modules.
+- **Anti-drift by design** — 7 numbered immutable Laws with verifiable pass/fail criteria, not abstract bullet points.
+- **Silent verbosity inference** — no need to declare `V=3`. The system reads your message length and tone and calibrates automatically.
+- **Tombstoning** — the system never silently degrades behavior when pressured. It surfaces the right mechanism instead.
 
 ---
 
@@ -55,7 +56,7 @@ promptos_v2/
 
 **Option A — Paste a combined system prompt directly:**
 1. Pick any file from `promptos_v2/combined/`
-2. Paste its contents as your system prompt in Claude, GPT-4o, Gemini, or any other LLM
+2. Paste its contents as your system prompt in Claude, GPT-4o, Gemini, Grok, or any other LLM
 3. Start chatting — no setup required
 
 **Option B — Compose kernel + module manually:**
@@ -83,6 +84,8 @@ The kernel enforces 7 immutable laws across every module:
 
 ## Verbosity Scale
 
+Set with `/v [1-5]` or auto-inferred from query length and tone — no declaration needed.
+
 | V | Label | Format |
 |---|-------|--------|
 | 1 | Signal | ≤3 sentences. Answer only. |
@@ -90,8 +93,6 @@ The kernel enforces 7 immutable laws across every module:
 | 3 | Standard | Full structured answer with context. |
 | 4 | Deep | Tradeoffs, edge cases, alternatives. |
 | 5 | Exhaustive | Maximum depth. Full module checklist run. |
-
-Set with `/v [1-5]` or auto-inferred from query length and complexity.
 
 ---
 
@@ -113,7 +114,7 @@ Set with `/v [1-5]` or auto-inferred from query length and complexity.
 /joke      One dry domain-appropriate joke
 ```
 
-Module-scoped commands are namespaced: `/[module_id]:[command]`  
+Module-scoped commands are namespaced: `/[module_id]:[command]`
 Example: `/sre:burnrate`, `/agentic_coder:security`, `/academic_peer_reviewer:checklist`
 
 ---
@@ -143,14 +144,12 @@ Each module has 5 extension points:
 ## MODULE.COMMANDS    # Namespaced slash commands (/module_id:command)
 ```
 
-**The behavioral delta test:** before writing a module rule, ask:  
-*"Would a highly capable generalist model get this wrong without being told?"*  
+**The behavioral delta test:** before writing a module rule, ask:
+*"Would a highly capable generalist model get this wrong without being told?"*
 If no → cut it.
 
 ---
 
 ## Credits
 
-- Original prompts: [ai-boost/awesome-prompts](https://github.com/ai-boost/awesome-prompts)
-- PromptOS architecture: synthesized from Best-of-4 agent competition
-- Competition lenses: Radical Minimalism · Modular Composition · Anti-Drift Engineering · User Intent First
+- Original domain prompts: [ai-boost/awesome-prompts](https://github.com/ai-boost/awesome-prompts)
