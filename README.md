@@ -1,9 +1,5 @@
 # PromptOS v2.0
 
-**A prompt operating system synthesized from a Best-of-4 agent competition.**
-
-One stable kernel. 275 domain modules. Every prompt from [ai-boost/awesome-prompts](https://github.com/ai-boost/awesome-prompts) recompiled into the PromptOS format.
-
 ---
 
 ## What Is This?
