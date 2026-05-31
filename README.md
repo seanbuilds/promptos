@@ -1,8 +1,6 @@
 # PromptOS v2.0
 
-**A prompt operating system for LLMs — one stable kernel, unlimited domain modules.**
 
-Inspired by [ai-boost/awesome-prompts](https://github.com/ai-boost/awesome-prompts).
 
 ---
 
